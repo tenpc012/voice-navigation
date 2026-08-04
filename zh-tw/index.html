@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文創風 HTML5 音樂播放器</title>
+    <title>文創風內嵌音樂播放器</title>
     <!-- 引入 Google Fonts 明體/襯線體，營造人文與書卷氣息 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +46,7 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 10px 30px rgba(60, 50, 40, 0.06);
             text-align: center;
-            width: 330px;
+            width: 330px; /* 播放器卡片寬度 */
             transition: all 0.3s ease;
         }
 
@@ -79,12 +79,23 @@
             font-style: italic;
         }
 
-        audio {
+        /* 新增：內嵌播放器的容器，負責圓角和整體樣式 */
+        .iframe-container {
             width: 100%;
-            outline: none;
-            border-radius: 30px;
-            /* 調整原生播放器濾鏡，使其顏色更融入暖色調背景 */
-            filter: sepia(20%) opacity(90%);
+            overflow: hidden; /* 確保圓角效果生效 */
+            border-radius: 8px; /* 加入文創風暖色圓角 */
+            border: 1px solid var(--border-color); /* 加入細緻邊框 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* 加入輕微陰影 */
+        }
+
+        /* 新增：針對 iframe 程式碼的 CSS 修正 */
+        .iframe-container iframe {
+            display: block; /* 移除 iframe 底部的微小空隙 */
+            width: 100%;    /* 讓它適應卡片寬度 */
+            border: none;   /* 移除所有邊框 */
+            
+            /* 💡 核心修正：加入濾鏡讓原本的灰色播放器帶有暖色調，符合文創風 */
+            filter: sepia(20%) contrast(90%); 
         }
     </style>
 </head>
@@ -95,10 +106,18 @@
         <h2>我的音樂播放器</h2>
         <p>享受美好的音樂時光</p>
         
-        <!-- 放置 Internet Archive 的內嵌播放器 -->
+        <!-- 💡 這裡是你修改後的內嵌程式碼 -->
         <div class="iframe-container">
-            <iframe src="https://archive.org/embed/1._20260804" height="30" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen=""></iframe>
+            <iframe 
+                src="https://archive.org/embed/1._20260804" 
+                height="30" 
+                frameborder="0" 
+                webkitallowfullscreen="true" 
+                mozallowfullscreen="true" 
+                allowfullscreen="">
+            </iframe>
         </div>
     </div>
+
 </body>
 </html>
