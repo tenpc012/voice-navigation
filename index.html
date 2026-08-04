@@ -1,61 +1,198 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML5 音樂播放器</title>
+    <title>選擇您的語言 | Language Selection</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #74b9ff, #a29bfe);
-            height: 100vh;
+        /* CSS 樣式重置 */
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 全螢幕背景與置中佈局 */
+        body {
+            min-height: 100vh;
+            /* 沉穩藍色調融合活力橘色光暈的漸層 */
+            background: linear-gradient(135deg, #0f172a 10%, #1e3a8a 50%, #c2410c 100%);
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
-        .player-card {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 320px;
-        }
-        h2 {
-            margin-bottom: 10px;
-            color: #2d3436;
-            font-size: 1.5rem;
-        }
-        p {
-            color: #636e72;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-        audio {
+
+        /* 語系選單主卡片容器 (毛玻璃效果) */
+        .language-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
             width: 100%;
-            outline: none;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: #ffffff;
+            animation: fadeIn 0.8s ease-out;
         }
-        .icon {
-            font-size: 48px;
+
+        /* 進場動畫 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 圖示與標題區域 */
+        .language-header {
+            margin-bottom: 30px;
+        }
+
+        .language-header svg {
+            width: 48px;
+            height: 48px;
+            fill: #ffffff;
             margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .language-header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .language-header p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* 語系選項清單 */
+        .language-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .language-item a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        /* 語系項目的懸停 (Hover) 特效 */
+        .language-item a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 語系名稱的本地化顯示 (例如: 繁體中文) */
+        .lang-native {
+            font-weight: 600;
+        }
+
+        /* 語系代號/英文名稱 (例如: Traditional Chinese) */
+        .lang-en {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+        }
+
+        .language-item a:hover .lang-en {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* 頁尾版權或提示 */
+        .language-footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 響應式微調 */
+        @media (max-width: 480px) {
+            .language-container {
+                padding: 30px 20px;
+            }
+            .language-header h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="player-card">
-        <div class="icon">🎵</div>
-        <h2>我的音樂播放器</h2>
-        <p>享受美好的音樂時光</p>
-        
-        <!-- HTML5 音樂播放器核心 -->
-        <!-- controls: 顯示播放控制列 -->
-        <!-- loop: 音樂結束時自動重播 (選填) -->
-        <audio controls loop>
-            <source src="music.mp3" type="audio/mpeg">
-            您的瀏覽器不支援 HTML5 音頻元素。
-        </audio>
+    <div class="language-container">
+        <!-- 頂部圖示與提示文字 -->
+        <div class="language-header">
+            <!-- 地球 SVG 圖示 -->
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+            <h1>Choose your language</h1>
+            <p>請選擇您的偏好語言 / Select your preferred language</p>
+        </div>
+
+        <!-- 語系清單選單 -->
+        <ul class="language-list">
+            <li class="language-item">
+                <a href="./zh-tw/index.html">
+                    <span class="lang-native">繁體中文</span>
+                    <span class="lang-en">Traditional Chinese</span>
+                </a>
+            </li>
+            <li class="language-item">
+                <a href="./zh-cn/index.html">
+                    <span class="lang-native">简体中文</span>
+                    <span class="lang-en">Simplified Chinese</span>
+                </a>
+            </li>
+            <li class="language-item">
+                <a href="./en/index.html">
+                    <span class="lang-native">English</span>
+                    <span class="lang-en">English</span>
+                </a>
+            </li>
+            <li class="language-item">
+                <a href="./ja/index.html">
+                    <span class="lang-native">日本語</span>
+                    <span class="lang-en">Japanese</span>
+                </a>
+            </li>
+            <li class="language-item">
+                <a href="./ko/index.html">
+                    <span class="lang-native">한국어</span>
+                    <span class="lang-en">Korean</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- 頁尾 -->
+        <div class="language-footer">
+            &copy; 2026 TenDrum culture. All rights reserved.
+        </div>
     </div>
 
 </body>
