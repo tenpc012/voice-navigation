@@ -1,141 +1,238 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文創風 RWD 內嵌音樂播放器</title>
-    <!-- 引入 Google Fonts 明體/襯線體，營造人文與書卷氣息 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-color: #F4F0EA;       /* 燕麥米沙色背景 */
-            --card-bg: #FAF8F5;        /* 柔和奶油白卡片 */
-            --primary-text: #2C2C2A;   /* 深墨灰標題 */
-            --secondary-text: #7A7571; /* 煙灰次要文字 */
-            --border-color: #E8E3DC;   /* 細緻邊框色 */
-            --sage-green: #4A5B4C;     /* 靜謐苔綠 */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>暖金色聲波音樂播放器</title>
+  <style>
+    /* 全域變數定義：色調完全比照圖片中的奶茶金/駝色風格 */
+    :root {
+      --main-color: #D3B28C;       /* 主配色：柔和奶茶金 */
+      --accent-color: #BE9B73;     /* 深一點的按鈕色 */
+      --light-color: #F8F4EE;      /* 播放器背景/點綴亮色 */
+      --track-bg: #EADBC8;         /* 進度條底色 */
+      --bg-gradient: linear-gradient(135deg, #fbf9f5 0%, #e6dec3 100%);
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-family: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
-            background-color: var(--bg-color);
-            background-image: radial-gradient(#E5DFD5 1px, transparent 1px);
-            background-size: 24px 24px;
-            min-height: 100vh; /* 確保在手機上也能垂直居中 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--primary-text);
-            padding: 20px; /* 防止手機邊緣貼齊 */
-        }
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-gradient);
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 20px;
+    }
 
-        /* 💡 核心修改：RWD 播放器卡片 */
-        .player-card {
-            background: var(--card-bg);
-            padding: 36px 28px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(60, 50, 40, 0.06);
-            text-align: center;
-            
-            /* 💡 RWD 設定：移除固定 width: 330px; */
-            width: 100%;           /* 在小螢幕下預設佔滿 100% */
-            max-width: 400px;      /* 💡 限制最大寬度，防止在大螢幕上拉得太寬 */
-            
-            transition: all 0.3s ease;
-        }
+    /* 播放器主要外盒 */
+    .player-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 30px 25px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 15px 35px rgba(185, 150, 110, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
 
-        .icon {
-            font-size: 40px;
-            margin-bottom: 16px;
-            display: inline-block;
-            color: var(--sage-green);
-            background: #EFEBE4;
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            border-radius: 50%;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
-        }
+    /* 1. 頂部聲波圖案 (Waveform) */
+    .waveform-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      width: 100%;
+      height: 45px;
+      gap: 3px;
+      padding: 0 5px;
+    }
 
-        h2 {
-            margin-bottom: 8px;
-            color: var(--primary-text);
-            font-size: 1.35rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            /* 防止標題太長在手機上斷行奇怪 */
-            word-wrap: break-word; 
-        }
+    .wave-bar {
+      flex: 1;
+      background-color: var(--main-color);
+      border-radius: 3px;
+      opacity: 0.85;
+      transition: height 0.3s ease;
+    }
 
-        p {
-            color: var(--secondary-text);
-            font-size: 0.88rem;
-            margin-bottom: 24px;
-            letter-spacing: 1px;
-            font-style: italic;
-        }
+    /* 2. 進度條 (Progress Bar) */
+    .progress-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-        /* 內嵌播放器的容器，負責圓角和整體樣式 */
-        .iframe-container {
-            width: 100%;
-            overflow: hidden; /* 確保圓角效果生效 */
-            border-radius: 8px; 
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-            /* 手機上可能需要稍微高一點點，防止控制鈕太小 */
-            height: 32px; 
-        }
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background-color: var(--track-bg);
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+    }
 
-        /* 💡 這段就是 RWD 的關鍵：讓 iframe 自動填滿容器 */
-        .iframe-container iframe {
-            display: block; 
-            width: 100%;    /* 自動適應父容器（.iframe-container -> .player-card）的寬度 */
-            height: 100%;   /* 填滿父容器高度 */
-            border: none;
-            
-            /* 💡 加入濾鏡讓原本的灰色播放器帶有暖色調，符合文創風 */
-            filter: sepia(20%) contrast(90%); 
-        }
+    .progress-bar-fill {
+      width: 32%; /* 範例播放進度 */
+      height: 100%;
+      background-color: var(--main-color);
+      border-radius: 10px;
+      position: relative;
+    }
 
-        /* 可選：針對極小螢幕（如舊款手機）的微調 */
-        @media (max-width: 320px) {
-            .player-card {
-                padding: 24px 16px;
-            }
-            h2 {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+    .progress-bar-handle {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background-color: var(--main-color);
+      border: 3px solid var(--light-color);
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    /* 3. 控制按鈕組 (Controls) */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 10px 0 10px;
+    }
+
+    .btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      color: #9E7B54;
+    }
+
+    .btn svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    /* 中間圓形主播放鍵 */
+    .btn-play-main {
+      width: 58px;
+      height: 58px;
+      background-color: var(--main-color);
+      color: var(--light-color);
+      border-radius: 50%;
+      box-shadow: 0 6px 15px rgba(190, 155, 115, 0.4);
+    }
+
+    .btn-play-main:hover {
+      background-color: var(--accent-color);
+      color: #FFF;
+      transform: scale(1.06);
+    }
+
+    .btn-play-main svg {
+      width: 26px;
+      height: 26px;
+      margin-left: 3px; /* 視覺置中 */
+      fill: currentColor;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="player-card">
-        <div class="icon">🎧</div>
-        <h2>我的音樂播放器</h2>
-        <p>享受美好的音樂時光</p>
-        
-        <div class="iframe-container">
-            <!-- 💡 將 iframe 原本的寬度設定移除，完全由 CSS 控制 -->
-            <iframe 
-                src="https://archive.org/embed/1._20260804" 
-                frameborder="0" 
-                webkitallowfullscreen="true" 
-                mozallowfullscreen="true" 
-                allowfullscreen="">
-            </iframe>
-        </div>
+  <div class="player-container">
+    
+    <!-- 1. 聲波區域 (透過簡短 inline CSS 模擬圖中高低起伏的頻譜) -->
+    <div class="waveform-container">
+      <div class="wave-bar" style="height: 40%;"></div>
+      <div class="wave-bar" style="height: 65%;"></div>
+      <div class="wave-bar" style="height: 80%;"></div>
+      <div class="wave-bar" style="height: 95%;"></div>
+      <div class="wave-bar" style="height: 50%;"></div>
+      <div class="wave-bar" style="height: 70%;"></div>
+      <div class="wave-bar" style="height: 35%;"></div>
+      <div class="wave-bar" style="height: 60%;"></div>
+      <div class="wave-bar" style="height: 85%;"></div>
+      <div class="wave-bar" style="height: 75%;"></div>
+      <div class="wave-bar" style="height: 45%;"></div>
+      <div class="wave-bar" style="height: 90%;"></div>
+      <div class="wave-bar" style="height: 60%;"></div>
+      <div class="wave-bar" style="height: 30%;"></div>
+      <div class="wave-bar" style="height: 55%;"></div>
+      <div class="wave-bar" style="height: 70%;"></div>
+      <div class="wave-bar" style="height: 100%;"></div>
+      <div class="wave-bar" style="height: 80%;"></div>
+      <div class="wave-bar" style="height: 65%;"></div>
+      <div class="wave-bar" style="height: 45%;"></div>
+      <div class="wave-bar" style="height: 75%;"></div>
+      <div class="wave-bar" style="height: 60%;"></div>
+      <div class="wave-bar" style="height: 80%;"></div>
+      <div class="wave-bar" style="height: 50%;"></div>
+      <div class="wave-bar" style="height: 35%;"></div>
+      <div class="wave-bar" style="height: 70%;"></div>
+      <div class="wave-bar" style="height: 90%;"></div>
+      <div class="wave-bar" style="height: 65%;"></div>
+      <div class="wave-bar" style="height: 80%;"></div>
     </div>
+
+    <!-- 2. 進度條區域 -->
+    <div class="progress-container">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill">
+          <div class="progress-bar-handle"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 五大控制按鈕組 (從左到右完全對應圖片) -->
+    <div class="controls">
+      <!-- 隨機播放 (Shuffle) -->
+      <button class="btn" title="隨機播放">
+        <svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.45 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+      </button>
+
+      <!-- 上一首 (Previous) -->
+      <button class="btn" title="上一首">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+
+      <!-- 播放 (Play) - 主按鈕 -->
+      <button class="btn btn-play-main" title="播放">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+
+      <!-- 下一首 (Next) -->
+      <button class="btn" title="下一首">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
+
+      <!-- 循環播放 (Repeat) -->
+      <button class="btn" title="循環播放">
+        <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+      </button>
+    </div>
+
+  </div>
 
 </body>
 </html>
