@@ -1,240 +1,62 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>文創風音樂播放器</title>
-  <!-- 引入 Google Fonts 提升文藝質感 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
-  
-  <style>
-    /* 全局變數定義 - 文創風大地配色 */
-    :root {
-      --bg-color: #F4F0EA;       /* 燕麥米色背景 */
-      --card-bg: #FAF8F5;        /* 柔和奶油白卡片 */
-      --primary-text: #2C2C2A;   /* 深墨灰內文 */
-      --secondary-text: #7A7571; /* 煙灰次要文字 */
-      --accent-color: #C06C4C;   /* 陶土赭紅（重點色） */
-      --sage-green: #4A5B4C;     /* 靜謐苔綠 */
-      --track-bg: #E3DED8;       /* 柔和灰棕進度條底色 */
-      --border-color: #E8E3DC;   /* 細緻邊框色 */
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--bg-color);
-      font-family: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
-      color: var(--primary-text);
-      /* 微微的紙張質感質理效果 */
-      background-image: radial-gradient(#E5DFD5 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-
-    /* 播放器主卡片 */
-    .player-card {
-      width: 340px;
-      padding: 28px;
-      background-color: var(--card-bg);
-      border-radius: 16px;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 10px 30px rgba(60, 50, 40, 0.05);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
-
-    /* 專輯封面區域 */
-    .cover-container {
-      width: 100%;
-      height: 240px;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-      position: relative;
-    }
-
-    .cover-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: sepia(10%) contrast(95%); /* 微微復古濾鏡 */
-    }
-
-    /* 歌曲資訊 */
-    .song-info {
-      text-align: center;
-      margin-bottom: 24px;
-      width: 100%;
-    }
-
-    .song-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: var(--primary-text);
-      margin-bottom: 6px;
-    }
-
-    .artist-name {
-      font-size: 0.9rem;
-      color: var(--secondary-text);
-      letter-spacing: 1.5px;
-      font-style: italic;
-    }
-
-    /* 進度條區域 */
-    .progress-area {
-      width: 100%;
-      margin-bottom: 24px;
-    }
-
-    .progress-bar-container {
-      width: 100%;
-      height: 4px;
-      background-color: var(--track-bg);
-      border-radius: 2px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .progress-bar {
-      width: 42%; /* 範例進度 */
-      height: 100%;
-      background-color: var(--accent-color);
-      border-radius: 2px;
-      position: relative;
-    }
-
-    .progress-bar::after {
-      content: '';
-      position: absolute;
-      right: -5px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 10px;
-      height: 10px;
-      background-color: var(--accent-color);
-      border: 2px solid var(--card-bg);
-      border-radius: 50%;
-    }
-
-    .time-stamps {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 8px;
-      font-size: 0.75rem;
-      color: var(--secondary-text);
-      letter-spacing: 0.5px;
-    }
-
-    /* 控制按鈕區 */
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 80%;
-    }
-
-    .btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--sage-green);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .btn:hover {
-      color: var(--accent-color);
-      transform: scale(1.08);
-    }
-
-    .btn-play {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background-color: var(--sage-green);
-      color: var(--card-bg);
-      box-shadow: 0 4px 12px rgba(74, 91, 76, 0.25);
-    }
-
-    .btn-play:hover {
-      background-color: var(--accent-color);
-      color: var(--card-bg);
-      transform: scale(1.05);
-    }
-
-    .btn svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-
-    .btn-play svg {
-      width: 22px;
-      height: 22px;
-      margin-left: 2px; /* 視覺居中調整 */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 音樂播放器</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .player-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+        }
+        h2 {
+            margin-bottom: 10px;
+            color: #2d3436;
+            font-size: 1.5rem;
+        }
+        p {
+            color: #636e72;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        audio {
+            width: 100%;
+            outline: none;
+        }
+        .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="player-card">
-    <!-- 專輯封面 -->
-    <div class="cover-container">
-      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="專輯封面">
+    <div class="player-card">
+        <div class="icon">🎵</div>
+        <h2>我的音樂播放器</h2>
+        <p>享受美好的音樂時光</p>
+        
+        <!-- HTML5 音樂播放器核心 -->
+        <!-- controls: 顯示播放控制列 -->
+        <!-- loop: 音樂結束時自動重播 (選填) -->
+        <audio controls loop>
+            <source src="music.mp3" type="audio/mpeg">
+            您的瀏覽器不支援 HTML5 音頻元素。
+        </audio>
     </div>
-
-    <!-- 歌曲資訊 -->
-    <div class="song-info">
-      <h2 class="song-title">山脊上的微風</h2>
-      <p class="artist-name">有機生活樂團</p>
-    </div>
-
-    <!-- 進度條 -->
-    <div class="progress-area">
-      <div class="progress-bar-container">
-        <div class="progress-bar"></div>
-      </div>
-      <div class="time-stamps">
-        <span>01:45</span>
-        <span>04:12</span>
-      </div>
-    </div>
-
-    <!-- 控制鍵 -->
-    <div class="controls">
-      <!-- 上一首 -->
-      <button class="btn" title="上一首">
-        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-      </button>
-
-      <!-- 播放/暫停 -->
-      <button class="btn btn-play" title="播放">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-
-      <!-- 下一首 -->
-      <button class="btn" title="下一首">
-        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-      </button>
-    </div>
-  </div>
 
 </body>
 </html>
