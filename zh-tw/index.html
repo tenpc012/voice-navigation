@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文創風內嵌音樂播放器</title>
+    <title>文創風 RWD 內嵌音樂播放器</title>
     <!-- 引入 Google Fonts 明體/襯線體，營造人文與書卷氣息 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,9 +15,8 @@
             --card-bg: #FAF8F5;        /* 柔和奶油白卡片 */
             --primary-text: #2C2C2A;   /* 深墨灰標題 */
             --secondary-text: #7A7571; /* 煙灰次要文字 */
-            --accent-color: #C06C4C;   /* 陶土赭紅點綴色 */
-            --sage-green: #4A5B4C;     /* 靜謐苔綠 */
             --border-color: #E8E3DC;   /* 細緻邊框色 */
+            --sage-green: #4A5B4C;     /* 靜謐苔綠 */
         }
 
         * {
@@ -29,16 +28,17 @@
         body {
             font-family: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
             background-color: var(--bg-color);
-            /* 點狀紙張紋理微效果 */
             background-image: radial-gradient(#E5DFD5 1px, transparent 1px);
             background-size: 24px 24px;
-            height: 100vh;
+            min-height: 100vh; /* 確保在手機上也能垂直居中 */
             display: flex;
             justify-content: center;
             align-items: center;
             color: var(--primary-text);
+            padding: 20px; /* 防止手機邊緣貼齊 */
         }
 
+        /* 💡 核心修改：RWD 播放器卡片 */
         .player-card {
             background: var(--card-bg);
             padding: 36px 28px;
@@ -46,7 +46,11 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 10px 30px rgba(60, 50, 40, 0.06);
             text-align: center;
-            width: 330px; /* 播放器卡片寬度 */
+            
+            /* 💡 RWD 設定：移除固定 width: 330px; */
+            width: 100%;           /* 在小螢幕下預設佔滿 100% */
+            max-width: 400px;      /* 💡 限制最大寬度，防止在大螢幕上拉得太寬 */
+            
             transition: all 0.3s ease;
         }
 
@@ -69,6 +73,8 @@
             font-size: 1.35rem;
             font-weight: 600;
             letter-spacing: 1px;
+            /* 防止標題太長在手機上斷行奇怪 */
+            word-wrap: break-word; 
         }
 
         p {
@@ -79,23 +85,36 @@
             font-style: italic;
         }
 
-        /* 新增：內嵌播放器的容器，負責圓角和整體樣式 */
+        /* 內嵌播放器的容器，負責圓角和整體樣式 */
         .iframe-container {
             width: 100%;
             overflow: hidden; /* 確保圓角效果生效 */
-            border-radius: 8px; /* 加入文創風暖色圓角 */
-            border: 1px solid var(--border-color); /* 加入細緻邊框 */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* 加入輕微陰影 */
+            border-radius: 8px; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            /* 手機上可能需要稍微高一點點，防止控制鈕太小 */
+            height: 32px; 
         }
 
-        /* 新增：針對 iframe 程式碼的 CSS 修正 */
+        /* 💡 這段就是 RWD 的關鍵：讓 iframe 自動填滿容器 */
         .iframe-container iframe {
-            display: block; /* 移除 iframe 底部的微小空隙 */
-            width: 100%;    /* 讓它適應卡片寬度 */
-            border: none;   /* 移除所有邊框 */
+            display: block; 
+            width: 100%;    /* 自動適應父容器（.iframe-container -> .player-card）的寬度 */
+            height: 100%;   /* 填滿父容器高度 */
+            border: none;
             
-            /* 💡 核心修正：加入濾鏡讓原本的灰色播放器帶有暖色調，符合文創風 */
+            /* 💡 加入濾鏡讓原本的灰色播放器帶有暖色調，符合文創風 */
             filter: sepia(20%) contrast(90%); 
+        }
+
+        /* 可選：針對極小螢幕（如舊款手機）的微調 */
+        @media (max-width: 320px) {
+            .player-card {
+                padding: 24px 16px;
+            }
+            h2 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -106,11 +125,10 @@
         <h2>我的音樂播放器</h2>
         <p>享受美好的音樂時光</p>
         
-        <!-- 💡 這裡是你修改後的內嵌程式碼 -->
         <div class="iframe-container">
+            <!-- 💡 將 iframe 原本的寬度設定移除，完全由 CSS 控制 -->
             <iframe 
                 src="https://archive.org/embed/1._20260804" 
-                height="30" 
                 frameborder="0" 
                 webkitallowfullscreen="true" 
                 mozallowfullscreen="true" 
