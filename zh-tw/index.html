@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>十鼓導覽 - 奇幻文創膠囊播放器</title>
+  <title>十鼓導覽 - 暗金流光奇幻播放器</title>
   <style>
     * {
       box-sizing: border-box;
@@ -16,37 +16,48 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      /* 全頁背景：沉穩暗色，凸顯播放器的主體光彩 */
-      background-color: #0f0d13;
+      background-color: #0b0a0e;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       padding: 20px;
     }
 
-    /* 🔮 奇幻文創風黑膠囊外框 */
+    /* 🔮 奇幻膠囊外框 + 暗金色閃爍光芒 */
     .player-card {
       width: 100%;
       max-width: 380px;
-      
-      /* 多層漸層與魔法微光濾鏡：深紫過渡至復古金銅 */
       background: 
-        radial-gradient(circle at 20% 20%, rgba(147, 112, 219, 0.15), transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.12), transparent 50%),
-        linear-gradient(135deg, #181226 0%, #241a2e 50%, #1e1713 100%);
+        radial-gradient(circle at 30% 30%, rgba(180, 140, 60, 0.15), transparent 60%),
+        linear-gradient(135deg, #16121e 0%, #1a1426 50%, #15100c 100%);
       
       border-radius: 32px;
       padding: 24px 28px 20px 28px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
       
-      /* 魔法邊框與複合陰影 */
-      border: 1px solid rgba(212, 175, 55, 0.25); /* 細緻古銅金邊框 */
-      box-shadow: 
-        0 12px 35px rgba(0, 0, 0, 0.6),
-        0 0 20px rgba(138, 43, 226, 0.15),
-        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      /* 套用暗金呼吸光芒動畫 */
+      animation: darkGoldGlow 4s infinite ease-in-out alternate;
       
       display: flex;
       flex-direction: column;
       gap: 22px;
-      backdrop-filter: blur(8px); /* 玻璃霧面濾鏡感 */
+      backdrop-filter: blur(8px);
+    }
+
+    /* 🌟 暗金色光茫動態關鍵幀 (Glow Keyframes) */
+    @keyframes darkGoldGlow {
+      0% {
+        box-shadow: 
+          0 10px 25px rgba(0, 0, 0, 0.7),
+          0 0 12px rgba(180, 136, 42, 0.25),
+          inset 0 0 10px rgba(180, 136, 42, 0.15);
+        border-color: rgba(212, 175, 55, 0.3);
+      }
+      100% {
+        box-shadow: 
+          0 12px 35px rgba(0, 0, 0, 0.8),
+          0 0 28px rgba(212, 175, 55, 0.55),
+          inset 0 0 18px rgba(212, 175, 55, 0.3);
+        border-color: rgba(255, 215, 0, 0.75);
+      }
     }
 
     /* 頂部極細進度條 */
@@ -59,19 +70,18 @@
     .progress-bar-bg {
       width: 100%;
       height: 3px;
-      background-color: rgba(255, 255, 255, 0.15);
+      background-color: rgba(255, 255, 255, 0.12);
       border-radius: 2px;
       position: relative;
     }
 
-    /* 進度條發光金紫漸層 */
     .progress-bar-fill {
       width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, #9b51e0, #f2c94c);
+      background: linear-gradient(90deg, #9b51e0, #d4af37);
       border-radius: 2px;
       position: relative;
-      box-shadow: 0 0 8px rgba(242, 201, 76, 0.5);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
     }
 
     .progress-handle {
@@ -83,7 +93,7 @@
       height: 11px;
       background-color: #fff8e7;
       border-radius: 50%;
-      box-shadow: 0 0 6px rgba(242, 201, 76, 0.8);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.9);
     }
 
     /* 控制按鈕列 */
@@ -99,7 +109,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: #e2d8ee;
+      color: #dfd5e8;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -109,9 +119,9 @@
 
     .btn:hover {
       opacity: 1;
-      color: #fce38a;
+      color: #ffd700;
       transform: scale(1.12);
-      filter: drop-shadow(0 0 6px rgba(252, 227, 138, 0.4));
+      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
     }
 
     .btn svg {
@@ -120,26 +130,26 @@
       fill: currentColor;
     }
 
-    /* 中間魔法金色發光主按鈕 */
+    /* 中間暗金質感發光主按鈕 */
     .btn-play-main {
       width: 52px;
       height: 52px;
-      background: linear-gradient(135deg, #f3e7e1 0%, #dad2c9 100%);
-      color: #1a102f;
+      background: linear-gradient(135deg, #f5e5c9 0%, #c59b27 100%);
+      color: #120e1a;
       border-radius: 50%;
       opacity: 1;
       box-shadow: 
-        0 4px 15px rgba(0, 0, 0, 0.3),
-        0 0 12px rgba(242, 201, 76, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+        0 4px 15px rgba(0, 0, 0, 0.4),
+        0 0 14px rgba(212, 175, 55, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.7);
     }
 
     .btn-play-main:hover {
       transform: scale(1.08);
-      background: linear-gradient(135deg, #ffffff 0%, #e6ded6 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #dfb235 100%);
       box-shadow: 
-        0 6px 20px rgba(0, 0, 0, 0.4),
-        0 0 18px rgba(242, 201, 76, 0.6);
+        0 6px 20px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(255, 215, 0, 0.8);
     }
 
     .btn-play-main svg {
@@ -164,19 +174,16 @@
       </div>
     </div>
 
-    <!-- 2. 精簡為三個核心按鈕 -->
+    <!-- 2. 三個核心控制按鈕 -->
     <div class="controls">
-      <!-- 倒退 10 秒 -->
       <button class="btn" id="prevBtn" title="倒退 10 秒">
         <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
       </button>
 
-      <!-- 中間主播放鍵 -->
       <button class="btn btn-play-main" id="playBtn" title="播放/暫停">
         <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </button>
 
-      <!-- 快進 10 秒 -->
       <button class="btn" id="nextBtn" title="快進 10 秒">
         <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
       </button>
@@ -196,7 +203,6 @@
     const playSVG = '<path d="M8 5v14l11-7z"/>';
     const pauseSVG = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
 
-    // 播放 / 暫停
     playBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play().then(() => {
@@ -210,7 +216,6 @@
       }
     });
 
-    // 自動更新進度條
     audio.addEventListener('timeupdate', () => {
       if (audio.duration) {
         const pct = (audio.currentTime / audio.duration) * 100;
@@ -218,7 +223,6 @@
       }
     });
 
-    // 點擊進度條跳轉時間
     progressArea.addEventListener('click', (e) => {
       if (!audio.duration) return;
       const rect = progressArea.getBoundingClientRect();
@@ -226,7 +230,6 @@
       audio.currentTime = (clickX / rect.width) * audio.duration;
     });
 
-    // 快進 / 倒退 10 秒
     prevBtn.addEventListener('click', () => audio.currentTime -= 10);
     nextBtn.addEventListener('click', () => audio.currentTime += 10);
   </script>
