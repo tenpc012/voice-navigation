@@ -3,231 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>極簡黑膠囊音樂播放器</title>
+  <title>Archive.org 黑膠囊整合版</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #f4f4f5; /* 淺灰背景凸顯黑膠囊 */
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      padding: 20px;
+      background-color: #f4f4f5;
+      font-family: -apple-system, sans-serif;
+      margin: 0;
     }
 
-    /* 💡 極黑大圓角膠囊外框 */
-    .player-card {
-      width: 100%;
-      max-width: 460px;
-      background-color: #212121; /* 極暗灰近黑 */
-      border-radius: 28px;
-      padding: 24px 28px 20px 28px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    /* 💡 頂部極細進度條 */
-    .progress-area {
-      width: 100%;
-      cursor: pointer;
-      padding: 6px 0; /* 增加點擊區域 */
-    }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 2px; /* 圖片中極細的線條 */
-      background-color: rgba(255, 255, 255, 0.25);
-      position: relative;
-    }
-
-    .progress-bar-fill {
-      width: 0%; /* JS 自動動態更新 */
-      height: 100%;
-      background-color: #ffffff;
-      position: relative;
-    }
-
-    /* 白色圓點拉桿 */
-    .progress-handle {
-      position: absolute;
-      right: -5px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 10px;
-      height: 10px;
-      background-color: #ffffff;
-      border-radius: 50%;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-    }
-
-    /* 💡 控制按鈕列 */
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 0 4px;
-    }
-
-    .btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #ffffff;
-      display: flex;
+    /* 💡 用膠囊外框把 iframe 包起來 */
+    .capsule-wrapper {
+      background-color: #212121; /* 極暗灰背景 */
+      padding: 12px 20px;
+      border-radius: 30px; /* 大圓角膠囊感 */
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      opacity: 0.9;
-      transition: all 0.2s ease;
     }
 
-    .btn:hover {
-      opacity: 1;
-      transform: scale(1.08);
-    }
-
-    .btn svg {
-      width: 22px;
-      height: 22px;
-      fill: currentColor;
-    }
-
-    /* 中間實心白色圓形播放鍵 */
-    .btn-play-main {
-      width: 48px;
-      height: 48px;
-      background-color: #ffffff;
-      color: #212121;
-      border-radius: 50%;
-      opacity: 1;
-    }
-
-    .btn-play-main:hover {
-      transform: scale(1.06);
-      background-color: #f0f0f0;
-    }
-
-    .btn-play-main svg {
-      width: 22px;
-      height: 22px;
-      fill: currentColor;
-    }
-
-    /* 收藏按鈕激活狀態 (紅心) */
-    .btn-heart.active {
-      color: #ff4b4b;
+    /* 調整 iframe 樣式，使其無縫嵌入 */
+    .capsule-wrapper iframe {
+      border: none;
+      border-radius: 12px;
+      /* 混合模式：可讓部分背景更融入 */
+      filter: invert(0.9) hue-rotate(180deg); /* 選擇性：將原生淺色播放器反轉成深色系 */
     }
   </style>
 </head>
 <body>
 
-  <div class="player-card">
-
-    <!-- 💡 隱藏音訊 (指向 Archive.org 或你自己的 MP3) -->
-    <audio id="audioPlayer" src="https://archive.org/embed/1._20260804" preload="metadata"></audio>
-
-    <!-- 1. 頂部細進度條 -->
-    <div class="progress-area" id="progressArea">
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressFill">
-          <div class="progress-handle"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. 控制按鈕組 (完全復刻圖片圖示與順序) -->
-    <div class="controls">
-      <!-- ☰ 選單 / 播放清單 -->
-      <button class="btn" id="menuBtn" title="播放清單">
-        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-      </button>
-
-      <!-- ⏭| 上一首 -->
-      <button class="btn" id="prevBtn" title="上一首">
-        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-      </button>
-
-      <!-- ❚❚ / ▶ 主播放按鈕 (白底黑圖示) -->
-      <button class="btn btn-play-main" id="playBtn" title="播放/暫停">
-        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-
-      <!-- |⏮ 下一首 -->
-      <button class="btn" id="nextBtn" title="下一首">
-        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-      </button>
-
-      <!-- ♡ 愛心 / 收藏 -->
-      <button class="btn btn-heart" id="heartBtn" title="收藏">
-        <svg id="heartIcon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-      </button>
-    </div>
-
+  <div class="capsule-wrapper">
+    <iframe 
+      src="https://archive.org/embed/1._20260804" 
+      width="450" 
+      height="30" 
+      frameborder="0" 
+      webkitallowfullscreen="true" 
+      mozallowfullscreen="true" 
+      allowfullscreen>
+    </iframe>
   </div>
 
-  <script>
-    const audio = document.getElementById('audioPlayer');
-    const playBtn = document.getElementById('playBtn');
-    const playIcon = document.getElementById('playIcon');
-    const progressArea = document.getElementById('progressArea');
-    const progressFill = document.getElementById('progressFill');
-    const heartBtn = document.getElementById('heartBtn');
-    const heartIcon = document.getElementById('heartIcon');
-
-    // SVG 圖示
-    const playSVG = '<path d="M8 5v14l11-7z"/>';
-    const pauseSVG = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-
-    // 播放/暫停控制
-    playBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    });
-
-    audio.addEventListener('play', () => {
-      playIcon.innerHTML = pauseSVG;
-    });
-
-    audio.addEventListener('pause', () => {
-      playIcon.innerHTML = playSVG;
-    });
-
-    // 進度條更新
-    audio.addEventListener('timeupdate', () => {
-      if (audio.duration) {
-        const pct = (audio.currentTime / audio.duration) * 100;
-        progressFill.style.width = `${pct}%`;
-      }
-    });
-
-    // 點擊進度條控制播放位置
-    progressArea.addEventListener('click', (e) => {
-      const rect = progressArea.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      audio.currentTime = (clickX / rect.width) * audio.duration;
-    });
-
-    // 愛心點擊切換狀態
-    heartBtn.addEventListener('click', () => {
-      heartBtn.classList.toggle('active');
-      const isLiked = heartBtn.classList.contains('active');
-      if (isLiked) {
-        heartIcon.innerHTML = '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>';
-      } else {
-        heartIcon.innerHTML = '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/>';
-      }
-    });
-  </script>
 </body>
 </html>
