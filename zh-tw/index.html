@@ -3,51 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Archive.org 黑膠囊整合版</title>
+  <title>十鼓導覽 - 極簡黑膠囊播放器</title>
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #f4f4f5;
-      font-family: -apple-system, sans-serif;
-      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 20px;
     }
 
-    /* 💡 用膠囊外框把 iframe 包起來 */
-    .capsule-wrapper {
-      background-color: #212121; /* 極暗灰背景 */
-      padding: 12px 20px;
-      border-radius: 30px; /* 大圓角膠囊感 */
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      display: inline-flex;
+    /* 極黑膠囊外框 */
+    .player-card {
+      width: 100%;
+      max-width: 460px;
+      background-color: #212121;
+      border-radius: 28px;
+      padding: 24px 28px 20px 28px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* 頂部極細進度條 */
+    .progress-area {
+      width: 100%;
+      cursor: pointer;
+      padding: 6px 0;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.25);
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background-color: #ffffff;
+      position: relative;
+    }
+
+    .progress-handle {
+      position: absolute;
+      right: -5px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 控制按鈕列 */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 4px;
+    }
+
+    .btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ffffff;
+      display: flex;
       align-items: center;
       justify-content: center;
+      opacity: 0.9;
+      transition: all 0.2s ease;
     }
 
-    /* 調整 iframe 樣式，使其無縫嵌入 */
-    .capsule-wrapper iframe {
-      border: none;
-      border-radius: 12px;
-      /* 混合模式：可讓部分背景更融入 */
-      filter: invert(0.9) hue-rotate(180deg); /* 選擇性：將原生淺色播放器反轉成深色系 */
+    .btn:hover {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* 中間實心白色圓形播放鍵 */
+    .btn-play-main {
+      width: 48px;
+      height: 48px;
+      background-color: #ffffff;
+      color: #212121;
+      border-radius: 50%;
+      opacity: 1;
+    }
+
+    .btn-play-main:hover {
+      transform: scale(1.06);
+      background-color: #f0f0f0;
+    }
+
+    .btn-play-main svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .btn-heart.active {
+      color: #ff4b4b;
     }
   </style>
 </head>
 <body>
 
-  <div class="capsule-wrapper">
-    <iframe 
-      src="https://archive.org/embed/1._20260804" 
-      width="450" 
-      height="30" 
-      frameborder="0" 
-      webkitallowfullscreen="true" 
-      mozallowfullscreen="true" 
-      allowfullscreen>
-    </iframe>
+  <div class="player-card">
+
+    <!-- 💡 已解析出的真實 Archive.org MP3 直連網址 -->
+    <audio id="audioPlayer" src="https://archive.org/serve/1._20260804/1.%20%E4%B8%AD%E6%96%87%20%E6%AD%A1%E8%BF%8E%E4%BE%86%E5%88%B0%E5%8D%81%E9%BC%93%E6%96%87%E5%89%B5%E5%9C%92%E5%8D%80.mp3" preload="metadata"></audio>
+
+    <!-- 1. 進度條 -->
+    <div class="progress-area" id="progressArea">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill">
+          <div class="progress-handle"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 控制按鈕組 -->
+    <div class="controls">
+      <button class="btn" title="選單">
+        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      </button>
+
+      <button class="btn" id="prevBtn" title="倒退 10 秒">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+
+      <button class="btn btn-play-main" id="playBtn" title="播放/暫停">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+
+      <button class="btn" id="nextBtn" title="快進 10 秒">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
+
+      <button class="btn btn-heart" id="heartBtn" title="收藏">
+        <svg id="heartIcon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </div>
+
   </div>
 
+  <script>
+    const audio = document.getElementById('audioPlayer');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const progressArea = document.getElementById('progressArea');
+    const progressFill = document.getElementById('progressFill');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const heartBtn = document.getElementById('heartBtn');
+    const heartIcon = document.getElementById('heartIcon');
+
+    const playSVG = '<path d="M8 5v14l11-7z"/>';
+    const pauseSVG = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+
+    // 播放 / 暫停
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().then(() => {
+          playIcon.innerHTML = pauseSVG;
+        }).catch(err => {
+          console.error("播放發生錯誤：", err);
+        });
+      } else {
+        audio.pause();
+        playIcon.innerHTML = playSVG;
+      }
+    });
+
+    // 自動更新進度條
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${pct}%`;
+      }
+    });
+
+    // 點擊進度條跳轉
+    progressArea.addEventListener('click', (e) => {
+      if (!audio.duration) return;
+      const rect = progressArea.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      audio.currentTime = (clickX / rect.width) * audio.duration;
+    });
+
+    // 快進 / 倒退 10 秒
+    prevBtn.addEventListener('click', () => audio.currentTime -= 10);
+    nextBtn.addEventListener('click', () => audio.currentTime += 10);
+
+    // 愛心切換
+    heartBtn.addEventListener('click', () => {
+      heartBtn.classList.toggle('active');
+      const isLiked = heartBtn.classList.contains('active');
+      heartIcon.innerHTML = isLiked 
+        ? '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>'
+        : '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/>';
+    });
+  </script>
 </body>
 </html>
