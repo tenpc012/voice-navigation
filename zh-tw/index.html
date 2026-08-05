@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>十鼓導覽 - 極簡黑膠囊播放器</title>
+  <title>十鼓導覽 - 三鍵極簡黑膠囊播放器</title>
   <style>
     * {
       box-sizing: border-box;
@@ -24,7 +24,7 @@
     /* 極黑膠囊外框 */
     .player-card {
       width: 100%;
-      max-width: 460px;
+      max-width: 380px; /* 控制按鈕減少後，稍微縮窄一點會更精緻 */
       background-color: #212121;
       border-radius: 28px;
       padding: 24px 28px 20px 28px;
@@ -60,6 +60,7 @@
       right: -5px;
       top: 50%;
       transform: translateY(-50%);
+      width: 100px;
       width: 10px;
       height: 10px;
       background-color: #ffffff;
@@ -67,13 +68,13 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     }
 
-    /* 控制按鈕列 */
+    /* 三鍵控制按鈕列 (使用 flex 均分佈局) */
     .controls {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       width: 100%;
-      padding: 0 4px;
+      padding: 0 20px;
     }
 
     .btn {
@@ -90,19 +91,19 @@
 
     .btn:hover {
       opacity: 1;
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
 
     .btn svg {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       fill: currentColor;
     }
 
     /* 中間實心白色圓形播放鍵 */
     .btn-play-main {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       background-color: #ffffff;
       color: #212121;
       border-radius: 50%;
@@ -115,13 +116,9 @@
     }
 
     .btn-play-main svg {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       fill: currentColor;
-    }
-
-    .btn-heart.active {
-      color: #ff4b4b;
     }
   </style>
 </head>
@@ -141,26 +138,21 @@
       </div>
     </div>
 
-    <!-- 2. 控制按鈕組 -->
+    <!-- 2. 精簡為三個核心按鈕 -->
     <div class="controls">
-      <button class="btn" title="選單">
-        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-      </button>
-
+      <!-- 倒退 10 秒 -->
       <button class="btn" id="prevBtn" title="倒退 10 秒">
         <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
       </button>
 
+      <!-- 中間主播放鍵 -->
       <button class="btn btn-play-main" id="playBtn" title="播放/暫停">
         <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </button>
 
+      <!-- 快進 10 秒 -->
       <button class="btn" id="nextBtn" title="快進 10 秒">
         <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-      </button>
-
-      <button class="btn btn-heart" id="heartBtn" title="收藏">
-        <svg id="heartIcon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
       </button>
     </div>
 
@@ -174,8 +166,6 @@
     const progressFill = document.getElementById('progressFill');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const heartBtn = document.getElementById('heartBtn');
-    const heartIcon = document.getElementById('heartIcon');
 
     const playSVG = '<path d="M8 5v14l11-7z"/>';
     const pauseSVG = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
@@ -202,7 +192,7 @@
       }
     });
 
-    // 點擊進度條跳轉
+    // 點擊進度條跳轉時間
     progressArea.addEventListener('click', (e) => {
       if (!audio.duration) return;
       const rect = progressArea.getBoundingClientRect();
@@ -213,15 +203,6 @@
     // 快進 / 倒退 10 秒
     prevBtn.addEventListener('click', () => audio.currentTime -= 10);
     nextBtn.addEventListener('click', () => audio.currentTime += 10);
-
-    // 愛心切換
-    heartBtn.addEventListener('click', () => {
-      heartBtn.classList.toggle('active');
-      const isLiked = heartBtn.classList.contains('active');
-      heartIcon.innerHTML = isLiked 
-        ? '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>'
-        : '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/>';
-    });
   </script>
 </body>
 </html>
