@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>十鼓導覽 - 播放器</title>
+  
+  <!-- 💡 1. 引入外部 CSS 檔案 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="player-card">
+    <audio id="audioPlayer" src="https://archive.org/serve/17._20260813_20260813_0541/17.%E9%98%BF%E6%8B%89%E4%BC%AF%E6%96%87.mp3"></audio>
+
+    <div class="progress-area" id="progressArea">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill">
+          <div class="progress-handle"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="prevBtn" title="倒退 10 秒">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+
+      <button class="btn btn-play-main" id="playBtn" title="播放/暫停">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+
+      <button class="btn" id="nextBtn" title="快進 10 秒">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 💡 2. 引入外部 JS 檔案 (建議放在 </body> 前面) -->
+  <script src="script.js"></script>
+</body>
+</html>
