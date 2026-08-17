@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* 💡 字體堆疊微調：帶點文創與現代奇幻感 */
+    font-family: 'Georgia', 'Times New Roman', Times, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    /* 🔮 全頁背景：沉穩的深奧紫夜空 */
+    background-color: #0b0a0e;
+    background: radial-gradient(circle at center, #1a102f 0%, #0b0a0e 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 🔮 奇幻文創魔法選單容器 */
+.language-container {
+    /* 深色皮革與霧面玻璃複合感 */
+    background: 
+      radial-gradient(circle at 15% 15%, rgba(147, 112, 219, 0.1), transparent 40%),
+      linear-gradient(145deg, #16121e 0%, #1a1426 60%, #15100c 100%);
+    
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* 🌟 暗金色閃爍呼吸邊框光 */
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 28px;
+    padding: 35px 30px;
+    width: 100%;
+    max-width: 680px; /* 稍微放寬雙欄 */
+    
+    /* 複合式魔法陰影與呼吸動畫 */
+    animation: fadeIn 0.8s ease-out, darkGoldGlow 5s infinite ease-in-out alternate;
+    text-align: center;
+    color: #e2d8ee; /* 淡紫白字 */
+}
+
+/* 🌟 暗金色光茫動態關鍵幀 */
+@keyframes darkGoldGlow {
+    0% {
+        box-shadow: 
+            0 15px 30px rgba(0, 0, 0, 0.7),
+            0 0 10px rgba(180, 136, 42, 0.2),
+            inset 0 0 8px rgba(180, 136, 42, 0.1);
+        border-color: rgba(212, 175, 55, 0.3);
+    }
+    100% {
+        box-shadow: 
+            0 18px 40px rgba(0, 0, 0, 0.8),
+            0 0 25px rgba(212, 175, 55, 0.5),
+            inset 0 0 16px rgba(212, 175, 55, 0.25);
+        border-color: rgba(255, 215, 0, 0.7);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.language-header {
+    margin-bottom: 25px;
+}
+
+.language-header svg {
+    width: 44px;
+    height: 44px;
+    /* 琥珀金色圖示 */
+    fill: #d4af37;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
+}
+
+.language-header h1 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    /* 金屬光感文字疊加 */
+    color: #ffffff;
+    background: linear-gradient(135deg, #ffffff 0%, #dfb235 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.language-header p {
+    font-size: 0.95rem;
+    color: rgba(226, 216, 238, 0.75);
+}
+
+/* 核心 Grid 雙欄與滾動區域 */
+.language-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 雙欄 */
+    gap: 12px; /* 稍微放寬間距 */
+    max-height: 52vh; /* 限制高度 */
+    overflow-y: auto;
+    padding-right: 8px;
+    padding-left: 2px;
+}
+
+/* 🎨 奇幻風格美化滾動條 */
+.language-list::-webkit-scrollbar {
+    width: 6px;
+}
+.language-list::-webkit-scrollbar-thumb {
+    /* 琥珀金滾動條 */
+    background: linear-gradient(180deg, #c59b27, #f5e5c9);
+    border-radius: 10px;
+    box-shadow: 0 0 4px rgba(212, 175, 55, 0.6);
+}
+.language-list::-webkit-scrollbar-track {
+    background: rgba(18, 14, 26, 0.6);
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.language-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* 琥珀微光背景 */
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 14px 18px; /* 加大內邊距提升質感 */
+    border-radius: 12px;
+    text-decoration: none;
+    color: #dfd5e8;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    box-shadow: inset 0 0 5px rgba(212, 175, 55, 0.05);
+}
+
+.language-item a:hover {
+    /* 懸停：亮琥珀金光茫 */
+    background: rgba(212, 175, 55, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 
+      0 5px 15px rgba(0, 0, 0, 0.4),
+      0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.lang-native { 
+    font-weight: 600; 
+}
+.lang-en { 
+    font-size: 0.85rem; 
+    color: rgba(223, 213, 232, 0.6); 
+    font-family: -apple-system, sans-serif; /* 英文代碼使用現代字體 */
+}
+
+.language-item a:hover .lang-en {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.language-footer {
+    margin-top: 25px;
+    font-size: 0.85rem;
+    color: rgba(226, 216, 238, 0.45);
+    letter-spacing: 0.5px;
+}
+
+/* RWD：手機版切換為單欄 */
+@media (max-width: 620px) {
+    .language-list {
+        grid-template-columns: 1fr;
+    }
+    .language-container {
+        padding: 30px 20px;
+    }
+    .language-header h1 {
+        font-size: 1.5rem;
+    }
+}
