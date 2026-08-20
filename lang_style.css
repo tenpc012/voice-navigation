@@ -2,13 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* 💡 字體堆疊微調：帶點文創與現代奇幻感 */
+    /* 字體堆疊微調：帶點文創與現代奇幻感 */
     font-family: 'Georgia', 'Times New Roman', Times, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Microsoft JhengHei", sans-serif;
 }
 
 body {
     min-height: 100vh;
-    /* 🔮 全頁背景：沉穩的深奧紫夜空 */
+    /* 全頁背景：沉穩的深奧紫夜空 */
     background-color: #0b0a0e;
     background: radial-gradient(circle at center, #1a102f 0%, #0b0a0e 100%);
     display: flex;
@@ -17,7 +17,7 @@ body {
     padding: 20px;
 }
 
-/* 🔮 奇幻文創魔法選單容器 */
+/* 奇幻文創魔法選單容器 */
 .language-container {
     /* 深色皮革與霧面玻璃複合感 */
     background: 
@@ -27,7 +27,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     
-    /* 🌟 暗金色閃爍呼吸邊框光 */
+    /* 暗金色閃爍呼吸邊框光 */
     border: 1px solid rgba(212, 175, 55, 0.4);
     border-radius: 28px;
     padding: 35px 30px;
@@ -38,9 +38,10 @@ body {
     animation: fadeIn 0.8s ease-out, darkGoldGlow 5s infinite ease-in-out alternate;
     text-align: center;
     color: #e2d8ee; /* 淡紫白字 */
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* 🌟 暗金色光茫動態關鍵幀 */
+/* 暗金色光茫動態關鍵幀 */
 @keyframes darkGoldGlow {
     0% {
         box-shadow: 
@@ -104,17 +105,20 @@ body {
     padding-left: 2px;
 }
 
-/* 🎨 奇幻風格美化滾動條 */
-.language-list::-webkit-scrollbar {
+/* 奇幻風格美化滾動條 */
+.language-list::-webkit-scrollbar,
+.bamboo-slats::-webkit-scrollbar {
     width: 6px;
 }
-.language-list::-webkit-scrollbar-thumb {
+.language-list::-webkit-scrollbar-thumb,
+.bamboo-slats::-webkit-scrollbar-thumb {
     /* 琥珀金滾動條 */
     background: linear-gradient(180deg, #c59b27, #f5e5c9);
     border-radius: 10px;
     box-shadow: 0 0 4px rgba(212, 175, 55, 0.6);
 }
-.language-list::-webkit-scrollbar-track {
+.language-list::-webkit-scrollbar-track,
+.bamboo-slats::-webkit-scrollbar-track {
     background: rgba(18, 14, 26, 0.6);
     border-radius: 10px;
     border: 1px solid rgba(212, 175, 55, 0.15);
@@ -165,6 +169,76 @@ body {
     font-size: 0.85rem;
     color: rgba(226, 216, 238, 0.45);
     letter-spacing: 0.5px;
+}
+
+/*新增：魔法竹簡景點選單容器 */
+.bamboo-container {
+    display: none;
+    width: 100%;
+    max-width: 680px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bamboo-slats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 10px 8px 10px 2px;
+    position: relative;
+}
+
+/* 單張竹簡片：繼承琥珀金光芒與 3D 開啟動態 */
+.slat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(26, 20, 38, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    padding: 14px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #dfd5e8;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    
+    /* 竹簡降落預備 */
+    opacity: 0;
+    transform: translateY(-25px) rotateX(-80deg);
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slat-item.show {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+}
+
+/* 00 號返回語言選擇的專屬微光 */
+.slat-item.slat-back {
+    background: rgba(45, 30, 20, 0.9);
+    border-color: rgba(255, 180, 0, 0.5);
+}
+
+.slat-item.slat-back .num {
+    color: #ffb400;
+}
+
+.slat-item .num {
+    color: #d4af37;
+    font-weight: bold;
+    margin-right: 12px;
+}
+
+.slat-item:hover {
+    background: rgba(212, 175, 55, 0.22);
+    border-color: rgba(255, 215, 0, 0.6);
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4), 0 0 12px rgba(255, 215, 0, 0.35);
 }
 
 /* RWD：手機版切換為單欄 */
