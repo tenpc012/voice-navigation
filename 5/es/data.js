@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Interior de la chimenea — Materiales, dimensiones y linternas del fuego de la felicidad",
+  "intro": "«¡Hola! ¡Soy Gu Ling Wa! Esta chimenea era el lugar donde se sedimentaban y enfriaban las cenizas de la bagazo de caña de azúcar tras su combustión. Al entrar, el interior está construido con ladrillos refractarios rojos apilados. La marca 'TR' en los ladrillos representa el sello de más alto estándar de la 'Taiwan Rengwa Co., Ltd.' durante la época del dominio japonés. ¡El diámetro de la base de esta gran chimenea es de 5.6 metros y el de la parte superior es de 3.8 metros! En este hermoso espacio, pueden encender una 'Linterna del fuego de la felicidad de la chimenea'—una linterna diseñada especialmente para quedarse suspendida en la boca de la chimenea a una altura equivalente a 23 pisos, ecológica y segura. ¡Vengan a pedir un deseo!»"
+};

@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "À l'intérieur de la cheminée — Matériaux, dimensions et lanternes du bonheur",
+  "intro": "« Bonjour ! Je suis Gu Ling Wa ! Cette cheminée était l'endroit où les cendres de bagasse de canne à sucre se déposaient et refroidissaient. En y entrant, l'intérieur est constitué d'un empilement de briques réfractaires rouges. La marque 'TR' sur les briques est le symbole des produits aux normes les plus élevées de la 'Taiwan Rengwa Co., Ltd.' sous l'occupation japonaise. Le diamètre de la base de cette grande cheminée est de 5,6 mètres et celui du sommet de 3,8 mètres ! Dans cet espace poétique, vous pouvez allumer une 'Lanterne du bonheur de la cheminée'—une lanterne spécialement conçue pour rester au niveau de l'ouverture de la cheminée haut de 23 étages, à la fois écologique et sûre. Venez vite faire vos vœux ! »"
+};

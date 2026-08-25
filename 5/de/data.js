@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Im Inneren des Schornsteins — Material, Maße & Glücks-Himmelslaterne",
+  "intro": "„Hallo! Ich bin Gu Ling Wa! Dieser Schornstein war der Ort, an dem sich die Asche nach der Verbrennung von Bagasse absetzte und abkühlte. Wenn Sie hineingehen, besteht das Innere aus gestapelten roten Feuerfeststeinen. Das Zeichen 'TR' auf den Steinen ist das Symbol für den höchsten Produktstandard der 'Taiwan Rengwa Co., Ltd.' während der japanischen Kolonialzeit. Der große Schornstein hat unten einen Durchmesser von 5,6 Metern und oben 3,8 Meter! In diesem malerischen Raum können Sie eine 'Schornstein-Glücks-Himmelslaterne' entzünden – die speziell entwickelte Laterne verbleibt genau an der Schornsteinöffnung in 23 Stockwerken Höhe, was umweltfreundlich und sicher ist. Kommen Sie schnell vorbei und wünschen Sie sich etwas!“"
+};
