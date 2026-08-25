@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Tres tanques de melaza — Altar de Huesos de Animales",
+  "intro": "«Este tanque de almacenamiento de melaza, el más antiguo del lugar, fue construido en 1941, el año del ataque a Pearl Harbor. La melaza se utilizaba para producir alcohol y colorante caramelo. Hoy, Ten Drum lo ha transformado en un nuevo teatro inmersivo llamado 'Altar de Huesos de Animales', con la temática del Antiguo Egipto sobre la 'Muerte y el Renacimiento', contando con 405 réplicas de huesos animales. El centro del altar está rodeado por huesos de pata de avestruz, custodiado por calaveras de camello, y suspendido en el aire se encuentra el esqueleto de un pterosaurio del Antiguo Egipto. Entre luces espectrales azul-verdosas y música sacerdotal, ¡sientan el estremecimiento del despertar del alma!»"
+};
