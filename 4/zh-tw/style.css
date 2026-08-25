@@ -4,14 +4,47 @@
   padding: 0;
 }
 
+/* 更新全域字體設定 (優先使用 Noto Sans TC) */
 body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #0b0a0e;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
   padding: 20px;
+}
+
+/* 定義【上方標題】樣式 */
+.c-title {
+  width: 100%;
+  text-align: center;
+  color: #f5e5c9;             /* 淺金/香檳金色，高對比度且契合主題 */
+  font-size: 30px;          /* 字體大小 (約 20px) */
+  font-weight: 700;            /* 粗體 */
+  letter-spacing: 2px;         /* 字距拉開，質感提升 */
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); /* 微弱金光效果 */
+}
+
+/* 定義【下方內容介紹】樣式 */
+.c-intro {
+  width: 100%;
+  text-align: center;
+  color: rgba(223, 213, 232, 0.85); /* 帶淺紫的冷灰白色，閱讀舒適 */
+  font-size: 0.95rem;         /* 字體大小 (約 15px) */
+  font-weight: 400;            /* 常規字體 */
+  line-height: 1.6;            /* 行高，避免多行時擠在一起 */
+  letter-spacing: 1px;
+}
+
+/* 新增中間容器 (讓上中下三塊都跟播放器一樣寬) */
+.middle-layout {
+  width: 100%;
+  max-width: 600px; /* 控制整體卡片與文字區塊的最大寬度，可自行調整 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px; /* 控制上、中、下三塊之間的距離 */
 }
 
 .player-card {
