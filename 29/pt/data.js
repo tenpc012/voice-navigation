@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Salão de Bênçãos — Salão do Imperador Amarelo",
+  "intro": "«Guerreiros duendes, estão prontos para ouvir um mito antigo? A lenda diz que o Imperador Amarelo, guiado pela Donzela dos Nove Céus, fez 80 tambores gigantes com a pele da besta divina Kuiniu e baquetas com os ossos do deus do trovão, produzindo um estrondo trovejante que elevou o moral dos soldados rumo à vitória! O som dos tambores possui a magia de dissipar o azar e trazer uma coragem inigualável. Ao chegar ao Salão de Bênçãos, realizaremos três rituais de bênção: caminhar pela 'Ponte da Paz das Sete Estrelas' para afastar o infortúnio; 'tocar o tambor pelas bênçãos' para que os desejos subam com o som pela chaminé até o céu; e por fim, juntar as 'palmas das mãos' diante do Imperador Amarelo Xuanyuan, sussurrando silenciosamente seu nome e desejos em seu coração para oferecer a bênção mais antiga e sagrada a si mesmo e aos seus entes queridos.»"
+};

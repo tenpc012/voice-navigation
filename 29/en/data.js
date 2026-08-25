@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Blessing Hall — Yellow Emperor Hall",
+  "intro": "Elf warriors, are you ready to listen to an ancient myth? Legend has it that the Yellow Emperor, guided by the Nine-Heavenly Maiden, made 80 giant drums from the skin of the divine beast Kuiniu and drumsticks from the thunder god's bones, producing a thunderous roar that boosted the soldiers' morale to ultimate victory! The sound of the drums possesses the magical power to dispel misfortune and bring matchless courage. Coming to the Blessing Hall, we will perform three blessing rituals: walk across the 'Seven-Star Peace Bridge' to dissolve disasters and bad luck; 'beat the drum for blessings' to let wishes travel with the sound up the chimney into the sky; and finally, put your 'palms together' before the Yellow Emperor Xuanyuan, silently whispering your name and wishes in your heart to offer the most ancient and sacred blessings for yourself and your loved ones."
+};
