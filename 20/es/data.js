@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Teatro Dream Sugar — Molino de cinco rodillos",
+  "intro": "«Este era el corazón de nuestra fábrica y la única área de prensado de caña de azúcar en Taiwán diseñada con un formato 'vertical'. En aquel entonces, la caña se trituraba repetidamente a través de cinco juegos de rodillos gigantes colocados lado a lado, impulsados por turbinas de vapor para extraer el jugo de azúcar más puro. ¡Aún recuerdo que el último día de funcionamiento de la fábrica se procesaron 2,512 toneladas métricas! Hoy, abandonado pero no olvidado, se han utilizado estructuras de acero y vidrio templado para elevar los asientos, transformándolo en el 'Teatro Dream Sugar' para disfrutar de los espectáculos de nivel internacional del 'Grupo de Percusión Ten Drum', ¡una experiencia impactante!»"
+};

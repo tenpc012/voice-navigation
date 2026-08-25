@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Théâtre Dream Sugar — Presse à cinq rouleaux",
+  "intro": "« C'était le cœur de notre usine, la seule zone de pressage de canne à sucre à Taïwan conçue selon une disposition 'verticale'. À l'époque, la canne à sucre était broyée à plusieurs reprises par cinq ensembles de rouleaux géants, entraînés par des turbines à vapeur pour en extraire le jus de sucre le plus pur. Je me souviens encore que le dernier jour d'exploitation de l'usine, la production de pressage a atteint 2 512 tonnes métriques ! Aujourd'hui, abandonné mais non oublié, ce lieu utilise des structures en acier et du verre trempé pour surélever les gradins, se transformant en 'Théâtre Dream Sugar' où l'on peut admirer les spectacles de percussion de classe internationale de la 'Ten Drum Art Percussion Group', d'une puissance saisissante ! »"
+};
