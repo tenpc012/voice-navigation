@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Einführung in die Zuckerrohrbahn & Anekdoten",
+  "intro": "„Hallo liebe Besucher! Ich bin der Leiter des Eisenbahn-Teams. Wenn Sie durch den Park spazieren, werden Sie viele Schienen unter Ihren Füßen bemerken. In Taiwan nennen wir die Zuckerrohrbahnen gewöhnlich 'Wu-Fen-Che' (Fünf-Zent-Züge). Warum heißen sie so? Weil die Spurweite dieser Gleise nur 76,2 cm beträgt—genau die Hälfte der internationalen Normalspur (152,4 cm, wie beim Hochgeschwindigkeitszug)! Früher hatten es die Zuckerrohrbauern sehr schwer und wurden von den Zuckergesellschaften oft beim Wiegen betrogen. Das alte Sprichwort 'Am dümmsten ist der, der Zuckerrohr anbaut, um es von der Gesellschaft wiegen zu lassen' ist eine wahre und zugleich bittersüße Erinnerung in der Geschichte der taiwanesischen Zuckerindustrie.“"
+};

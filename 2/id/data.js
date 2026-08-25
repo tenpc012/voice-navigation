@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Pengenalan Jalur Kereta Gula & Fakta Menarik",
+  "intro": "“Halo para pengunjung! Saya adalah kepala tim rel kereta. Saat berjalan di area taman, Anda akan melihat banyak rel kereta di bawah kaki Anda. Di Taiwan, kami biasa menyebut kereta api industri gula yang mengangkut tebu sebagai 'Kereta Wufen' (Kereta Lima Persen). Mengapa dinamakan 'Kereta Wufen'? Karena lebar rel ini hanya 76,2 cm, tepat setengah dari lebar rel standar internasional (152,4 cm, seperti kereta cepat)! Dahulu, para petani tebu bekerja sangat keras dan sering kali dicurangi dalam penimbangan oleh perusahaan gula. Peribahasa kuno yang berbunyi 'Orang paling bodoh adalah yang menanam tebu untuk ditimbang oleh perusahaan' merupakan kenangan nyata sekaligus getir dalam sejarah industri gula Taiwan.”"
+};

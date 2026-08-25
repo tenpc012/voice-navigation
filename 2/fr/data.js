@@ -1,0 +1,4 @@
+const pageData = {
+  "title": "Voies ferrées sucrières et anecdotes historiques",
+  "intro": "« Bonjour chers visiteurs ! Je suis le chef de l'équipe ferroviaire. En vous promenant dans le parc, vous remarquerez de nombreux rails sous vos pieds. À Taïwan, nous appelons communément les trains sucriers qui transportent la canne à sucre 'Wu-Fen-Che' (les trains de cinq dixièmes). Pourquoi ce nom ? Parce que l'écartement de cette voie n'est que de 76,2 cm, soit exactement la moitié de l'écartement standard international (152,4 cm, comme celui du TGV) ! Autrefois, les planteurs de canne souffraient beaucoup et se faisaient souvent léser sur le poids par les compagnies sucrières. Le proverbe 'Le plus sot est celui qui plante de la canne pour la faire peser par la compagnie' témoigne d'un souvenir très réel et amer de l'histoire sucrière taïwanaise. »"
+};

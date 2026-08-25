@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>十鼓導覽 - 播放器</title>
-  
-  <!-- 💡 1. 引入外部 CSS 檔案 -->
-  <link rel="stylesheet" href="style.css">
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>十鼓導覽 - 播放器</title>
+
+	<!-- 引入外部 CSS 檔案 -->
+		<link rel="stylesheet" href="style.css">
+	  
+	<!-- 引入 Google Fonts (Noto Sans TC 思源黑體) -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+		
+	<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-0T5XQXW56T"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-0T5XQXW56T');
+		</script>
+		
+	</head>
 <body>
 
+	<!-- 垂直排列的核心外框容器 -->
+	<div class="middle-layout">
+
+    <!-- 1. 上區塊：影片標題 -->
+    <div class="c-title">
+      <p id="title-text">載入標題中...</p>
+    </div>
+
+    <!-- 2. 中區塊：播放器主體 -->
   <div class="player-card">
     <audio id="audioPlayer" src="https://archive.org/serve/2._20260806_20260806_0138/2.%E9%9F%93%E6%96%87.mp3" preload="metadata"></audio>
 
@@ -36,7 +60,16 @@
     </div>
   </div>
 
-  <!-- 💡 2. 引入外部 JS 檔案 (建議放在 </body> 前面) -->
-  <script src="script.js"></script>
+<!-- 3. 下區塊：影片內容介紹 -->
+    <div class="c-intro">
+		<p id="intro-text">載入簡介中...</p>
+    </div>
+
+  </div>
+  
+	<!--引入外部 JS 檔案 -->
+	<script src="script.js"></script>
+	<script src="data.js"></script>
+
 </body>
 </html>
